@@ -1,38 +1,36 @@
-// Jogo do adivinho
-// Anotações..
-// > = Maior
-// < = Menor
+let numero = gerarNumero();
+let tentativas = 1;
 
-const Numero = Math.floor(Math.random() * 10) + 1;
-let tent = 1;
-
-function exibirNaTela(tag, texto) {
+function exibirTela(tag, texto) {
   let campo = document.querySelector(tag);
   campo.innerHTML = texto;
 }
 
-function mensagemNaTela() {
-  exibirNaTela('h1', 'Math Game')
-  exibirNaTela('p', 'Escolha um número de 1 a 10:')
+function exibirMensagemInicial() {
+  exibirTela('h1', 'Math Game');
+  exibirTela('p', 'Escolha um número de 1 a 10');
 }
 
-mensagemNaTela();
+exibirMensagemInicial();
 
-function jogar() {
-  const entrada = document.getElementById('num');
-  const msg = document.getElementById('msg');
-  const bismo = +entrada.value;
-
+function verificarChute() {
+  const chute = document.getElementById('chutar').value;
   
+  if (chute == numero) {
+    exibirTela('h1', 'Acertou !!');
+    let = palavraTent = tentativas > 1 ? 'tentativas' : 'tentativa';
+    let = mensagemTent = `Você descobriu o número com ${tentativas} ${palavraTent} !`;
+    exibirTela('p', mensagemTent);
+  } else {
+    if (numero > chute) {
+      exibirTela('p', 'número é maior');
+    } else {
+      exibirTela('p', 'número é menor');
+    }
+    tentativas++;
+  }
+}
 
-  if (bismo < 1 || bismo > 10) return msg.textContent = 'Não entendeu como joga?';
-
-  msg.textContent = bismo == Numero
-    ? `O número era ${Numero} e você acertou com ${tent > 1 ? tent + ' tentativas' : 'uma tentativa'} !!`
-    : `O número é ${Numero > bismo ? 'maior' : 'menor'} que ${bismo}.`;
-
-  bismo != Numero ? tent++ : entrada.disabled = true;
-
-  entrada.value = '';
-  entrada.focus();
+function gerarNumero() {
+  return Math.floor(Math.random() * 10 + 1);
 }
