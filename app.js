@@ -13,7 +13,7 @@ function exibirNaTela(tag, texto) {
 
 function mensagemNaTela() {
   exibirNaTela('h1', 'Math Game')
-  exibirNaTela('p', 'Escolha um número de 1 a 10:"
+  exibirNaTela('p', 'Escolha um número de 1 a 10:')
 }
 
 mensagemNaTela();
