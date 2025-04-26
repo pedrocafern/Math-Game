@@ -1,36 +1,51 @@
-let numero = gerarNumero();
+let numero = gerarNumeroSecreto();
 let tentativas = 1;
 
-function exibirTela(tag, texto) {
-  let campo = document.querySelector(tag);
-  campo.innerHTML = texto;
+function gerarNumeroSecreto(){
+    return parseInt(Math.random() * 10 + 1);
 }
 
-function exibirMensagemInicial() {
-  exibirTela('h1', 'Math Game');
-  exibirTela('p', 'Escolha um número de 1 a 10');
+function exibirNaTela(tag, texto) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto; 
 }
 
-exibirMensagemInicial();
+function mensagemNaTela() {
+    exibirNaTela('h1', 'Math Game');
+    exibirNaTela('p', 'Escolha um número de 1 a 10:');
+}
+
+mensagemNaTela();
 
 function verificarChute() {
-  const chute = document.getElementById('chutar').value;
-  
-  if (chute == numero) {
-    exibirTela('h1', 'Acertou !!');
-    let = palavraTent = tentativas > 1 ? 'tentativas' : 'tentativa';
-    let = mensagemTent = `Você descobriu o número com ${tentativas} ${palavraTent} !`;
-    exibirTela('p', mensagemTent);
-  } else {
-    if (numero > chute) {
-      exibirTela('p', 'número é maior');
-    } else {
-      exibirTela('p', 'número é menor');
+    let chute = document.querySelector('input').value;
+
+    if (chute == numero) {
+      exibirNaTela('h1', 'Acertou!')
+      let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+      let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
+      exibirNaTela('p', mensagemTentativas);
+      document.getElementById('reiniciar').removeAttribute('disabled');
+    } else{
+      if (chute > numero) {
+        exibirNaTela('p', 'O numero é menor');
+      } else {
+        exibirNaTela('p', 'O numero é maior');
+      }
+      tentativas++;
+      limparCampo();
     }
-    tentativas++;
-  }
 }
 
-function gerarNumero() {
-  return Math.floor(Math.random() * 10 + 1);
+function limparCampo() {
+  chute = document.querySelector('input');
+  chute.value = '';
+}
+
+function reiniciarJogo() {
+  numero = gerarNumeroSecreto();
+  limparCampo();
+  tentativas = 1;
+  mensagemNaTela();
+  document.getElementById('reiniciar').setAttribute('disabled', true)
 }
